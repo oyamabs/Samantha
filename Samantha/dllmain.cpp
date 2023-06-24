@@ -22,7 +22,9 @@ BOOL APIENTRY DllMain( HMODULE hModule,
     {
     case DLL_PROCESS_ATTACH:
         DisableThreadLibraryCalls(hModule);
-        CloseHandle(CreateThread(NULL, 0, (LPTHREAD_START_ROUTINE)SamThread, hModule, 0, NULL));
+        const HANDLE hThread = CreateThread(NULL, 0, (LPTHREAD_START_ROUTINE)SamThread, hModule, 0, NULL);
+        
+        CloseHandle(hThread);
     case DLL_THREAD_ATTACH:
     case DLL_THREAD_DETACH:
     case DLL_PROCESS_DETACH:
