@@ -1,6 +1,5 @@
 // dllmain.cpp : Définit le point d'entrée de l'application DLL.
 #include "pch.h"
-#include "Addresses.h"
 #include "Samantha.h"
 
 BOOL WINAPI SamThread(HMODULE hMod) {
