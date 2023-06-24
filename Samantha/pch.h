@@ -7,7 +7,13 @@
 #ifndef PCH_H
 #define PCH_H
 
+// define
+#define DBG 1
+
 // ajouter les en-têtes à précompiler ici
 #include "framework.h"
+#include <Windows.h>
+#include <iostream>
+#include <TlHelp32.h>
 
 #endif //PCH_H
