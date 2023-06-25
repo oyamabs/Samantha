@@ -24,4 +24,4 @@ Trainer for Call of Duty Black Ops Zombies.
 
 - Add an web API because why not
 
-- Make my own DLL injector
+- ~~Make my own DLL injector~~
