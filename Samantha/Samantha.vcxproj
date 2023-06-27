@@ -71,11 +71,11 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <ExternalIncludePath>$(ExternalIncludePath)</ExternalIncludePath>
+    <ExternalIncludePath>$(DXSDK_DIR)Include;$(ExternalIncludePath)</ExternalIncludePath>
     <LibraryPath>$(DXSDK_Dir)Lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <ExternalIncludePath>$(ExternalIncludePath)</ExternalIncludePath>
+    <ExternalIncludePath>$(DXSDK_DIR)Include;$(ExternalIncludePath)</ExternalIncludePath>
     <LibraryPath>$(DXSDK_Dir)Lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
