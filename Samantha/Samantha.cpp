@@ -61,6 +61,10 @@ void Samantha::QuitTrainer()
     Samantha::SetUnlimitedAmmos(false);
 }
 
+void Samantha::ExecServer() {
+
+}
+
 void Samantha::ExecTrainer(HMODULE hMod) {
     // Starting the trainer by initializing debug console
     AllocConsole();
