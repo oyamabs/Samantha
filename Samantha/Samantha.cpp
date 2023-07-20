@@ -3,8 +3,11 @@
 #include "Addresses.h"
 #include "Codes.h"
 #include "proc.h"
+#include "httplib.h"
 
 constexpr int SLEEP_DELAY = 5;
+
+httplib::Server pSrv;
 
 void Samantha::MsgBox(const wchar_t* msg)
 {
@@ -62,7 +65,13 @@ void Samantha::QuitTrainer()
 }
 
 void Samantha::ExecServer() {
+    pSrv.Get("/", [](const httplib::Request&, httplib::Response& res) {
+        res.set_content("Hello World!", "text/plain");
+        });
 
+
+
+    pSrv.listen("0.0.0.0", 1337);
 }
 
 void Samantha::ExecTrainer(HMODULE hMod) {
@@ -73,7 +82,10 @@ void Samantha::ExecTrainer(HMODULE hMod) {
 
     MsgBox(L"Trainer Injected ! Press <PageUp> for displaying help !");
     SetConsoleTitleA("Samantha Trainer");
-
+    
+    std::thread tWebServer(ExecServer);
+    // CloseHandle(CreateThread(NULL, 0, (LPTHREAD_START_ROUTINE)ExecServer, NULL, 0, NULL));
+    
     // Hack loop
     bool bRunning = true;
 
@@ -123,6 +135,7 @@ void Samantha::ExecTrainer(HMODULE hMod) {
     FreeConsole();
     fclose(pF);
 
+    pSrv.stop();
     // Leaving the thread to eject the trainer
     FreeLibraryAndExitThread(hMod, NULL);
 }

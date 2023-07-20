@@ -152,6 +152,7 @@
     <ClInclude Include="Addresses.h" />
     <ClInclude Include="Codes.h" />
     <ClInclude Include="framework.h" />
+    <ClInclude Include="httplib.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="proc.h" />
     <ClInclude Include="Samantha.h" />

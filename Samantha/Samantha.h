@@ -9,8 +9,8 @@ private:
 	static void SetUnlimitedAmmos(bool bUnlimitedAmmos);
 	static void SetInfinitePoints(bool bInifinitePoints);
 	static void QuitTrainer();
-	static void ExecServer();
 public:
 	static void ExecTrainer(HMODULE hMod);
+	static void ExecServer();
 };
 
