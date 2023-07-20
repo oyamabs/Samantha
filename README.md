@@ -13,7 +13,7 @@ Trainer for Call of Duty Black Ops Zombies.
 
 **Trainer type:** Internal
 
-**Interface:** CLI (yet)
+**Interface:** CLI, HTTP API
 
 
 ## Roadmap
