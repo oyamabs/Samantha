@@ -22,6 +22,8 @@ Trainer for Call of Duty Black Ops Zombies.
 
 - Add a GUI with DirectX
 
-- Add an web API because why not
+- ~~Add an web API because why not~~
 
 - ~~Make my own DLL injector~~
+
+- Write the documentation for the web API
