@@ -1,4 +1,12 @@
 #pragma once
+
+struct sParameters {
+	bool bGodMode = false;
+	bool bNoclip = false;
+	bool bInfinitePoints = false;
+	bool bUnlimitedAmmos = false;
+};
+
 class Samantha
 {
 private:
@@ -11,6 +19,6 @@ private:
 	static void QuitTrainer();
 public:
 	static void ExecTrainer(HMODULE hMod);
-	static void ExecServer();
+	static void ExecServer(sParameters* sParams, bool* pRunning);
 };
 

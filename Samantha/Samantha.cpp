@@ -6,7 +6,6 @@
 #include "httplib.h"
 
 constexpr int SLEEP_DELAY = 5;
-
 httplib::Server pSrv;
 
 void Samantha::MsgBox(const wchar_t* msg)
@@ -64,10 +63,11 @@ void Samantha::QuitTrainer()
     Samantha::SetUnlimitedAmmos(false);
 }
 
-void Samantha::ExecServer() {
+void Samantha::ExecServer(sParameters* sParams, bool* pRunning) {
+    
     pSrv.Get("/", [](const httplib::Request&, httplib::Response& res) {
         res.set_content("Hello World!", "text/plain");
-        });
+    });
 
 
 
@@ -83,18 +83,15 @@ void Samantha::ExecTrainer(HMODULE hMod) {
     MsgBox(L"Trainer Injected ! Press <PageUp> for displaying help !");
     SetConsoleTitleA("Samantha Trainer");
     
-    std::thread tWebServer(ExecServer);
-    // CloseHandle(CreateThread(NULL, 0, (LPTHREAD_START_ROUTINE)ExecServer, NULL, 0, NULL));
-    
-    // Hack loop
+    // Starting hack
     bool bRunning = true;
+    sParameters params;
 
-    // params
-    bool bGodMode = false, bNoclip = false, bInfinitePoints = false, bUnlimitedAmmos = false;
+    // Starting web server
+    std::thread tWebServer(ExecServer, &params, &bRunning);
 
     while (bRunning) {
         Sleep(SLEEP_DELAY); // Avoiding thread to work "too much"
-
         if (GetAsyncKeyState(VK_END) & 1) {
             bRunning = false;
             Samantha::QuitTrainer();
@@ -107,27 +104,27 @@ void Samantha::ExecTrainer(HMODULE hMod) {
             Samantha::DisplayHelp();
         
         if (GetAsyncKeyState(VK_F2) & 1) {
-            bNoclip = !bNoclip;
+            params.bNoclip = !params.bNoclip;
 
-            Samantha::SetNoclip(bNoclip);
+            Samantha::SetNoclip(params.bNoclip);
         }
 
         if (GetAsyncKeyState(VK_F3) & 1) {
-            bGodMode = !bGodMode;
+            params.bGodMode = !params.bGodMode;
 
-            Samantha::SetGodMode(bGodMode);
+            Samantha::SetGodMode(params.bGodMode);
         }
 
         if (GetAsyncKeyState(VK_F4) & 1) {
-            bUnlimitedAmmos = !bUnlimitedAmmos;
+            params.bUnlimitedAmmos = !params.bUnlimitedAmmos;
 
-            Samantha::SetUnlimitedAmmos(bUnlimitedAmmos);
+            Samantha::SetUnlimitedAmmos(params.bUnlimitedAmmos);
         }
 
         if (GetAsyncKeyState(VK_F5) & 1) {
-            bInfinitePoints = !bInfinitePoints;
+            params.bInfinitePoints = !params.bInfinitePoints;
 
-            Samantha::SetInfinitePoints(bInfinitePoints);
+            Samantha::SetInfinitePoints(params.bInfinitePoints);
         }
     }
 
