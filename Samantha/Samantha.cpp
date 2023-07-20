@@ -66,10 +66,43 @@ void Samantha::QuitTrainer()
 void Samantha::ExecServer(sParameters* sParams, bool* pRunning) {
     
     pSrv.Get("/", [](const httplib::Request&, httplib::Response& res) {
-        res.set_content("Hello World!", "text/plain");
+        res.set_content("/ - display this message\n/setGodMode - sets god mode\n/setUnlimitedAmmos - Set unlimited ammos\n/setUnlimitedPoints - sets unlimited points\n/setPoints/:points - sets number of points (max: 2147483647)\n/setNoclip - sets no clip mode", "text/plain");
     });
 
+    pSrv.Get("/setGodMode", [&](const httplib::Request&, httplib::Response& res) {
+        sParams->bGodMode = !sParams->bGodMode;
 
+        SetGodMode(sParams->bGodMode);
+    });
+
+    pSrv.Get("/setUnlimitedPoints", [&](const httplib::Request&, httplib::Response& res) {
+        sParams->bInfinitePoints = !sParams->bInfinitePoints;
+
+        SetInfinitePoints(sParams->bInfinitePoints);
+    });
+
+    pSrv.Get("/setUnlimitedAmmos", [&](const httplib::Request&, httplib::Response& res) {
+        sParams->bUnlimitedAmmos = !sParams->bUnlimitedAmmos;
+
+        SetUnlimitedAmmos(sParams->bUnlimitedAmmos);
+    });
+    
+    pSrv.Get("/setNoclip", [&](const httplib::Request&, httplib::Response& res) {
+        sParams->bNoclip = !sParams->bNoclip;
+
+        SetNoclip(sParams->bNoclip);
+    });
+
+    pSrv.Get("/setPoints/:points", [&](const httplib::Request& req, httplib::Response& res) {
+        std::string sPoints = req.path_params.at("points");
+
+        try {
+            *Player::iPoints = std::stoi(sPoints.c_str());;
+        }
+        catch (std::exception& e) {
+            MsgBox(L"Erreur lors de l'attribution des points ! Le type doit être un nombre !");
+        }
+    });
 
     pSrv.listen("0.0.0.0", 1337);
 }
