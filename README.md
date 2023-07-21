@@ -36,10 +36,15 @@ The api can be accessed through the `1337` port. A small documentation can be ac
 ### Endpoints
 
 `/` - Shows a small documentation
+
 `/setGodMode` - Set/unset the god mode cheat
+
 `/setUnlimitedAmmos` - Set/unset unlimited ammo cheat
+
 `/setUnlimitedPoints` - Set/unset unlimited points cheat
+
 `/setNoclip` - Set/unset the no clip cheat
+
 `/setPoints/:points` - Set points value for player (for example `/setPoints/1337` will set your points to 1337)
 
 
